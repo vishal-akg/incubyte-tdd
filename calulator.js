@@ -1,15 +1,26 @@
 const add = (numbers) => {
-  const numArray = numbers.split(",");
+  const delimiter = numbers.indexOf("//") == 0 ? numbers[2] : ",";
+  if (numbers.indexOf("//") == 0) {
+    numbers = numbers.substring(4);
+  }
 
-  if (numArray.length > 2) {
+  if (numbers.split(delimiter).length > 2) {
     throw new TypeError("Unknow amount of numbers");
   }
+
+  if (numbers.indexOf(",\n") !== -1 || numbers.indexOf("\n,") !== -1) {
+    throw new TypeError("Invalid input sequences");
+  }
+
+  const numArray = numbers.replace("\n", ",").split(delimiter);
 
   if (numArray[0] === "") return 0;
 
   if (numArray.length === 2 && numArray[1] === "") return parseInt(numArray[0]);
 
-  return parseInt(numArray[0]) + parseInt(numArray[1]);
+  return numArray.reduce((a, b) => {
+    return parseInt(a) + parseInt(b);
+  }, 0);
 };
 
 module.exports = { add };

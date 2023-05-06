@@ -16,4 +16,12 @@ describe("Calulator", () => {
   it("throws expection for unknown amount of numbers", () => {
     expect(() => add("1,2,3,4,5")).toThrow(TypeError);
   });
+
+  it("handles new lines escape character", () => {
+    expect(add("1\n2,3")).toEqual(6);
+  });
+
+  it("returns 3 for the given input with delimiter input", () => {
+    expect(add("//;\n1;2")).toEqual(3);
+  });
 });
