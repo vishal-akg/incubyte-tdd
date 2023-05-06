@@ -1,6 +1,7 @@
 const add = (numbers) => {
-  const delimiter = numbers.indexOf("//") == 0 ? numbers[2] : ",";
+  let delimiter = ",";
   if (numbers.indexOf("//") == 0) {
+    delimiter = numbers[2];
     numbers = numbers.substring(4);
   }
 

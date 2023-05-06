@@ -24,4 +24,8 @@ describe("Calulator", () => {
   it("returns 3 for the given input with delimiter input", () => {
     expect(add("//;\n1;2")).toEqual(3);
   });
+
+  it("throws exception for negative numbers", () => {
+    expect(() => add("-1,-2")).toThrow(TypeError);
+  });
 });
