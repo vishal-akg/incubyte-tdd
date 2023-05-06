@@ -12,4 +12,8 @@ describe("Calulator", () => {
   it("returns 3 for the input 1,2", () => {
     expect(add("1,2")).toEqual(3);
   });
+
+  it("throws expection for unknown amount of numbers", () => {
+    expect(() => add("1,2,3,4,5")).toThrow(TypeError);
+  });
 });
