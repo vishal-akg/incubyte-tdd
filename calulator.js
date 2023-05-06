@@ -1,7 +1,7 @@
 const add = (numbers) => {
-  let delimiter = ",";
+  const delimiter = extractDelimiter(numbers);
+
   if (numbers.indexOf("//") == 0) {
-    delimiter = numbers[2];
     numbers = numbers.substring(4);
   }
 
@@ -14,16 +14,7 @@ const add = (numbers) => {
   }
 
   const numArray = numbers.replace("\n", ",").split(delimiter);
-
-  const negatives = [];
-  if (
-    numArray.forEach((num) => {
-      if (parseInt(num) < 0) {
-        negatives.push(num);
-      }
-    })
-  );
-
+  const negatives = checkNegatives(numArray);
   if (negatives.length > 0) {
     throw new TypeError(`negatives not allowed ${negatives.join(" ")}`);
   }
@@ -36,5 +27,29 @@ const add = (numbers) => {
     return parseInt(a) + parseInt(b);
   }, 0);
 };
+
+/**
+ *
+ * function extract the delimiter if any present or returns the default ,
+ */
+
+function extractDelimiter(numbers) {
+  return numbers.indexOf("//") === 0 ? numbers[2] : ",";
+}
+
+/**
+ *
+ * function checks for presence of any negative number
+ */
+function checkNegatives(numbers) {
+  const negatives = [];
+  numbers.forEach((num) => {
+    if (parseInt(num) < 0) {
+      negatives.push(num);
+    }
+  });
+
+  return negatives;
+}
 
 module.exports = { add };
