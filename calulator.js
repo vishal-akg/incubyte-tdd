@@ -14,6 +14,19 @@ const add = (numbers) => {
 
   const numArray = numbers.replace("\n", ",").split(delimiter);
 
+  const negatives = [];
+  if (
+    numArray.forEach((num) => {
+      if (parseInt(num) < 0) {
+        negatives.push(num);
+      }
+    })
+  );
+
+  if (negatives.length > 0) {
+    throw new TypeError(`negatives not allowed ${negatives.join(" ")}`);
+  }
+
   if (numArray[0] === "") return 0;
 
   if (numArray.length === 2 && numArray[1] === "") return parseInt(numArray[0]);
